@@ -1,0 +1,79 @@
+A51 MACRO ASSEMBLER  MATRIX                                                               04/02/2022 14:40:17 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\matrix.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE matrix.a51 SET(SMALL) DEBUG PRINT(.\Listings\matrix.lst) OBJECT(.\Objec
+                      ts\matrix.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020030            2     LJMP MAIN
+                       3      
+0030                   4     ORG 30H
+0030                   5     MAIN:
+0030 AB30              6     MOV R3,30H
+0032 AC30              7     MOV R4,30H
+                       8     
+0034 7831              9     MOV R0,#31H
+                      10     
+0036 7400             11     MOV A,#0
+0038 AA30             12     MOV R2,30H
+003A                  13     SQUARE :
+003A 2530             14     ADD A,30H
+003C DAFC             15     DJNZ R2,SQUARE
+003E 2431             16     ADD A,#31H
+0040 F9               17     MOV R1,A
+                      18     
+0041                  19     LOOP :
+0041 AC30             20     MOV R4,30H
+0043                  21     HERE : 
+0043 E6               22     MOV A,@R0
+0044 87F0             23     MOV B,@R1
+0046 25F0             24     ADD A,B
+0048 F5F0             25     MOV B,A
+                      26     
+004A E9               27     MOV A,R1
+004B AA30             28     MOV R2,30H
+004D                  29     SUM :
+004D 2530             30     ADD A,30H
+004F DAFC             31     DJNZ R2,SUM
+0051 F9               32     MOV R1,A
+0052 A7F0             33     MOV @R1,B
+                      34     
+0054 AA30             35     MOV R2,30H
+0056                  36     SUB :
+0056 9530             37     SUBB A,30H
+0058 DAFC             38     DJNZ R2,SUB
+005A F9               39     MOV R1,A
+                      40     
+005B 08               41     INC R0
+005C 09               42     INC R1
+005D DCE4             43     DJNZ R4,HERE
+005F DBE0             44     DJNZ R3,LOOP
+                      45     
+0061 80FE             46     SJMP $
+                      47     
+                      48     END
+A51 MACRO ASSEMBLER  MATRIX                                                               04/02/2022 14:40:17 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0043H   A   
+LOOP . . . . . . .  C ADDR   0041H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+SQUARE . . . . . .  C ADDR   003AH   A   
+SUB. . . . . . . .  C ADDR   0056H   A   
+SUM. . . . . . . .  C ADDR   004DH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

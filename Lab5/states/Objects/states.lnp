@@ -1,0 +1,3 @@
+".\Objects\led_states.obj" 
+TO ".\Objects\states" 
+PRINT(".\Listings\states.m51") RAMSIZE(256) 

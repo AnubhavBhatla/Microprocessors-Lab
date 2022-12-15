@@ -1,0 +1,83 @@
+A51 MACRO ASSEMBLER  BINARY                                                               01/31/2022 15:58:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\binary.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE binary.a51 SET(SMALL) DEBUG PRINT(.\Listings\binary.lst) OBJECT(.\Objec
+                      ts\binary.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+                       3     
+0100                   4     ORG 100H
+0100                   5     MAIN:
+0100 3130              6     CALL SEARCH
+                       7     
+0102 80FE              8     HERE: SJMP HERE
+                       9     
+0130                  10     ORG 130H
+0130                  11     SEARCH:
+0130 A831             12     MOV R0, 31H
+0132 A930             13     MOV R1, 30H
+0134 D3               14     SETB C
+0135                  15     NEXT: 
+0135 5025             16     JNC SMALLER
+0137 E8               17     LABEL1 : MOV A,R0
+0138 75F002           18     MOV B,#02H
+013B 84               19     DIV AB
+013C F8               20     MOV R0,A
+013D 600B             21     JZ ZERO
+013F E8               22     LABEL2 : MOV A,R0
+0140 29               23     ADD A,R1
+0141 F9               24     MOV R1,A
+0142 E7               25     MOV A,@R1
+0143 C3               26     CLR C
+0144 B532EE           27     CJNE A,32H,NEXT
+0147 8933             28     MOV 33H,R1
+0149 22               29     RET
+014A                  30     ZERO : 
+014A C5F0             31     XCH A,B
+014C B400F0           32     CJNE A,#00H,LABEL2
+014F E530             33     MOV A,30H
+0151 2531             34     ADD A,31H
+0153 14               35     DEC A
+0154 F8               36     MOV R0,A
+0155 E6               37     MOV A,@R0
+0156 B53209           38     CJNE A,32H,LAST
+0159 8833             39     MOV 33H,R0
+015B 22               40     RET
+015C                  41     SMALLER :
+015C E9               42     MOV A,R1
+015D 98               43     SUBB A,R0
+015E F9               44     MOV R1,A
+015F 020137           45     LJMP LABEL1
+0162                  46     LAST:
+0162 75330E           47     MOV 33H,#0EH
+0165 22               48     RET
+                      49     END
+A51 MACRO ASSEMBLER  BINARY                                                               01/31/2022 15:58:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+LABEL1 . . . . . .  C ADDR   0137H   A   
+LABEL2 . . . . . .  C ADDR   013FH   A   
+LAST . . . . . . .  C ADDR   0162H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXT . . . . . . .  C ADDR   0135H   A   
+SEARCH . . . . . .  C ADDR   0130H   A   
+SMALLER. . . . . .  C ADDR   015CH   A   
+ZERO . . . . . . .  C ADDR   014AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

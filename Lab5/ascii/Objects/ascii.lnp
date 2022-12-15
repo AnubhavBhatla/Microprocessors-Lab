@@ -1,0 +1,3 @@
+".\Objects\convert.obj" 
+TO ".\Objects\ascii" 
+PRINT(".\Listings\ascii.m51") RAMSIZE(256) 

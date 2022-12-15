@@ -1,0 +1,79 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/02/2022  14:40:17  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\matrix.obj TO .\Objects\matrix PRINT (.\Listings\matrix.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\matrix.obj (MATRIX)
+
+
+LINK MAP OF MODULE:  .\Objects\matrix (MATRIX)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0063H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\matrix (MATRIX)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MATRIX
+  D:00F0H         SYMBOL        B
+  C:0043H         SYMBOL        HERE
+  C:0041H         SYMBOL        LOOP
+  C:0030H         SYMBOL        MAIN
+  C:003AH         SYMBOL        SQUARE
+  C:0056H         SYMBOL        SUB
+  C:004DH         SYMBOL        SUM
+  C:0000H         LINE#         2
+  C:0030H         LINE#         6
+  C:0032H         LINE#         7
+  C:0034H         LINE#         9
+  C:0036H         LINE#         11
+  C:0038H         LINE#         12
+  C:003AH         LINE#         14
+  C:003CH         LINE#         15
+  C:003EH         LINE#         16
+  C:0040H         LINE#         17
+  C:0041H         LINE#         20
+  C:0043H         LINE#         22
+  C:0044H         LINE#         23
+  C:0046H         LINE#         24
+  C:0048H         LINE#         25
+  C:004AH         LINE#         27
+  C:004BH         LINE#         28
+  C:004DH         LINE#         30
+  C:004FH         LINE#         31
+  C:0051H         LINE#         32
+  C:0052H         LINE#         33
+  C:0054H         LINE#         35
+  C:0056H         LINE#         37
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/02/2022  14:40:17  PAGE 2
+
+
+  C:0058H         LINE#         38
+  C:005AH         LINE#         39
+  C:005BH         LINE#         41
+  C:005CH         LINE#         42
+  C:005DH         LINE#         43
+  C:005FH         LINE#         44
+  C:0061H         LINE#         46
+  -------         ENDMOD        MATRIX
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0036H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=99
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

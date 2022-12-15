@@ -1,0 +1,199 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              04/02/2022 17:08:36 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.exe main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include "endsem.h"
+   3          
+   4          char S_str[6]= {0,0,0,0,0,0};   //String for Balance Sita
+   5          char G_str[6] = {0,0,0,0,0,0};  //String for Balance Gita
+   6          char n500_s[3]= {0,0,0};    // STRING FOR 500RS NOTE
+   7          char n100_s[3]= {0,0,0};    // STRING FOR 100RS NOTE
+   8          
+   9          char password[5] = {0,0,0,0,0} ;   //PASSWORD ARRAY
+  10          //Main function
+  11          
+  12          //-------------------------------------------------
+  13          void main(void)
+  14          {
+  15   1        unsigned char state=0;
+  16   1        unsigned char account=0;
+  17   1        unsigned char w=0;
+  18   1        unsigned char pass=0;
+  19   1        
+  20   1        int S_bal = 10000;
+  21   1        int G_bal = 10000;
+  22   1        int withdraw = 0;
+  23   1        int n500 = 0;
+  24   1        int n100 = 0;
+  25   1        int n=0;
+  26   1        int flag=0;
+  27   1        
+  28   1        char S_pass[5] = {'E','E','3','3','7'};
+  29   1        char G_pass[5] = {'U','P','L','A','B'};
+  30   1        
+  31   1        uart_init();            // Please finish this function in endsem.h 
+  32   1        transmit_string("Press A for Account display and W for withdrawing cash\r\n");
+  33   1          while (1)
+  34   1          {
+  35   2              /* code */
+  36   2              // YOUR CODE GOES HERE
+  37   2            state = receive_char();
+  38   2            if (state == 'w'){
+  39   3              state = 'W';
+  40   3            }
+  41   2            if (state == 'a'){
+  42   3              state = 'A';
+  43   3            }
+  44   2            switch(state)
+  45   2            {
+  46   3              case 'A' : 
+  47   3                transmit_string("Hello, Please enter Account Number\r\n");
+  48   3                account = receive_char();
+  49   3                switch(account){
+  50   4                  case '1' : 
+  51   4                    transmit_string("Account Holder: Sita\r\n");
+  52   4                    int_to_string(S_bal,S_str);
+  53   4                    transmit_string("Account Balance: ");
+  54   4                    transmit_string(S_str);
+C51 COMPILER V9.60.0.0   MAIN                                                              04/02/2022 17:08:36 PAGE 2   
+
+  55   4                    transmit_string("\r\n");
+  56   4                    break;
+  57   4                  case '2' :
+  58   4                    transmit_string("Account Holder: Gita\r\n");
+  59   4                    int_to_string(G_bal,G_str);
+  60   4                    transmit_string("Account Balance: ");
+  61   4                    transmit_string(G_str);
+  62   4                    transmit_string("\r\n");
+  63   4                    break;
+  64   4                  default:
+  65   4                    transmit_string("No such account, please enter valid details\r\n");
+  66   4                    break;
+  67   4                }
+  68   3                break;
+  69   3              case 'W' : 
+  70   3                transmit_string("Hello, Please enter Account Number\r\n");
+  71   3                account = receive_char();
+  72   3                switch(account){
+  73   4                  case '1' : 
+  74   4                    transmit_string("Please enter password\r\n");
+  75   4                    pass = receive_char();
+  76   4                    password[4] = pass;
+  77   4                    pass = receive_char();
+  78   4                    password[3] = pass;
+  79   4                    pass = receive_char();
+  80   4                    password[2] = pass;
+  81   4                    pass = receive_char();
+  82   4                    password[1] = pass;
+  83   4                    pass = receive_char();
+  84   4                    password[0] = pass;
+  85   4                    
+  86   4                    if (password == S_pass){
+  87   5                      transmit_string("Account Holder: Sita\r\n");
+  88   5                      int_to_string(S_bal,S_str);
+  89   5                      transmit_string("Account Balance: ");
+  90   5                      transmit_string(S_str);
+  91   5                      transmit_string("\r\n");
+  92   5                      transmit_string("Enter Amount, in hundreds\r\n");
+  93   5                      w = receive_char();
+  94   5                      n = w - '0';
+  95   5                      withdraw = n*1000;
+  96   5                      w = receive_char();
+  97   5                      n = w - '0';
+  98   5                      withdraw = withdraw + n*100;
+  99   5                      if(withdraw < S_bal){
+ 100   6                        S_bal = S_bal - withdraw;
+ 101   6                        int_to_string(S_bal,S_str);
+ 102   6                        transmit_string("Remaining Balance: ");
+ 103   6                        transmit_string(S_str);
+ 104   6                        transmit_string("\r\n");
+ 105   6                        n500 = withdraw/500;
+ 106   6                        n100 = (withdraw - n500*500)/100;
+ 107   6                        int_to_string_2(n500,n500_s);
+ 108   6                        int_to_string_2(n100,n100_s);
+ 109   6                        transmit_string("500 Notes: ");
+ 110   6                        transmit_string(n500_s);
+ 111   6                        transmit_string(", 100 Notes: ");
+ 112   6                        transmit_string(n100_s);    
+ 113   6                        transmit_string("\r\n");
+ 114   6                      }
+ 115   5                      else{
+ 116   6                        transmit_string("Insufficient Funds\r\n");
+C51 COMPILER V9.60.0.0   MAIN                                                              04/02/2022 17:08:36 PAGE 3   
+
+ 117   6                      }
+ 118   5                      break;
+ 119   5                    }
+ 120   4                    else{
+ 121   5                      transmit_string("Incorrect Password\r\n");
+ 122   5                      break;
+ 123   5                    }
+ 124   4                  case '2' :
+ 125   4                    transmit_string("Please enter password\r\n");
+ 126   4                    pass = receive_char();
+ 127   4                    password[4] = pass;
+ 128   4                    pass = receive_char();
+ 129   4                    password[3] = pass;
+ 130   4                    pass = receive_char();
+ 131   4                    password[2] = pass;
+ 132   4                    pass = receive_char();
+ 133   4                    password[1] = pass;
+ 134   4                    pass = receive_char();
+ 135   4                    password[0] = pass;
+ 136   4                  
+ 137   4                    if (password == G_pass){
+ 138   5                      transmit_string("Account Holder: Gita\r\n");
+ 139   5                      int_to_string(G_bal,G_str);
+ 140   5                      transmit_string("Account Balance: ");
+ 141   5                      transmit_string(G_str);
+ 142   5                      transmit_string("\r\n");
+ 143   5                      transmit_string("Enter Amount, in hundreds\r\n");
+ 144   5                      w = receive_char();
+ 145   5                      n = w - '0';
+ 146   5                      withdraw = withdraw + n*100;
+ 147   5                      if(withdraw < G_bal){
+ 148   6                        G_bal = G_bal - withdraw;
+ 149   6                        int_to_string(G_bal,G_str);
+ 150   6                        transmit_string("Remaining Balance: ");
+ 151   6                        transmit_string(G_str);
+ 152   6                        transmit_string("\r\n");
+ 153   6                        n500 = withdraw/500;
+ 154   6                        n100 = (withdraw - n500*500)/100;
+ 155   6                        int_to_string_2(n500,n500_s);
+ 156   6                        int_to_string_2(n100,n100_s);
+ 157   6                        transmit_string("500 Notes: ");
+ 158   6                        transmit_string(n500_s);
+ 159   6                        transmit_string(", 100 Notes: ");
+ 160   6                        transmit_string(n100_s);    
+ 161   6                        transmit_string("\r\n");
+ 162   6                      }
+ 163   5                      else{
+ 164   6                        transmit_string("Insufficient Funds\r\n");
+ 165   6                      }
+ 166   5                      break;
+ 167   5                    else{
+*** ERROR C141 IN LINE 167 OF main.c: syntax error near 'else', expected '__asm'
+ 168   6                      transmit_string("Incorrect Password\r\n");
+ 169   6                      break;
+ 170   6                    }
+ 171   5                  default:
+ 172   5                    transmit_string("No such account, please enter valid details\r\n");
+ 173   5                    break;
+ 174   5                }
+ 175   4            }
+ 176   3          }
+ 177   2      }
+C51 COMPILER V9.60.0.0   MAIN                                                              04/02/2022 17:08:36 PAGE 4   
+
+ 178   1      
+ 179   1      
+*** ERROR C141 IN LINE 179 OF main.c: syntax error near '', expected '__asm'
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)

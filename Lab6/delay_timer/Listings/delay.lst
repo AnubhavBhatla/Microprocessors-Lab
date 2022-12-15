@@ -1,0 +1,88 @@
+A51 MACRO ASSEMBLER  DELAY                                                                03/07/2022 15:32:11 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\delay.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE delay.a51 SET(SMALL) DEBUG PRINT(.\Listings\delay.lst) OBJECT(.\Objects
+                      \delay.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0
+0000 020030            2     LJMP MAIN
+                       3     
+0030                   4     ORG 30H
+0030                   5     MAIN :
+0030 7531C3            6     MOV 31H,#0C3H
+0033 753250            7     MOV 32H,#50H
+0036 74FF              8     MOV A,#0FFH
+0038 9432              9     SUBB A,#32H
+003A 2401             10     ADD A,#1
+003C F532             11     MOV 32H,A
+003E 4031             12     JC CARRY
+0040 74FF             13     BACK : MOV A,#0FFH
+0042 9531             14     SUBB A,31H
+0044 F531             15     MOV 31H,A
+                      16     
+0046 74FF             17     MOV A,#0FFH
+0048 753002           18     MOV 30H,#2
+004B AB30             19     LOOP : MOV R3,30H
+004D 1154             20     ACALL DELAY
+004F F4               21     CPL A
+0050 F590             22     MOV P1,A
+0052 80F7             23     SJMP LOOP
+                      24     
+0054                  25     DELAY:
+0054 7A28             26     HERE : MOV R2,#40
+0056 115D             27     HERE2 : ACALL TIMER
+0058 DAFC             28     DJNZ R2,HERE2
+005A DBF8             29     DJNZ R3,HERE
+005C 22               30     RET
+                      31             
+005D                  32     TIMER:
+005D 758901           33     MOV TMOD,#01
+0060 85328A           34     MOV TL0,32H
+0063 85318C           35     MOV TH0,31H
+0066 D28C             36     SETB TR0
+0068 308DFD           37     AGAIN : JNB TF0, AGAIN
+006B C28C             38     CLR TR0
+006D C28D             39     CLR TF0
+006F 22               40     RET
+0070 22               41     RET
+                      42     
+0071                  43     CARRY :
+0071 E531             44     MOV A,31H
+0073 9401             45     SUBB A,#1
+0075 F531             46     MOV 31H,A
+0077 020040           47     LJMP BACK
+                      48     
+                      49     END
+A51 MACRO ASSEMBLER  DELAY                                                                03/07/2022 15:32:11 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0068H   A   
+BACK . . . . . . .  C ADDR   0040H   A   
+CARRY. . . . . . .  C ADDR   0071H   A   
+DELAY. . . . . . .  C ADDR   0054H   A   
+HERE . . . . . . .  C ADDR   0054H   A   
+HERE2. . . . . . .  C ADDR   0056H   A   
+LOOP . . . . . . .  C ADDR   004BH   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TIMER. . . . . . .  C ADDR   005DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,61 @@
+A51 MACRO ASSEMBLER  CONVERT                                                              02/13/2022 18:12:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\convert.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE convert.a51 SET(SMALL) DEBUG PRINT(.\Listings\convert.lst) OBJECT(.\Obj
+                      ects\convert.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP CONVERT
+                       3     
+0100                   4     ORG 100H
+0100                   5     CONVERT:
+0100 E530              6             MOV A,30H
+0102 540F              7             ANL A,#0FH
+0104 FA                8             MOV R2,A
+0105 3115              9             ACALL CHECK
+0107 F561             10             MOV 61H,A
+                      11             
+0109 E530             12             MOV A,30H
+010B 54F0             13             ANL A,#240
+010D C4               14             SWAP A
+010E FA               15             MOV R2,A
+010F 3115             16             ACALL CHECK
+0111 F560             17             MOV 60H,A
+                      18             
+0113 80FE             19             HERE : SJMP HERE
+                      20             
+0115                  21             CHECK:
+0115 C3               22             CLR C
+0116 940A             23             SUBB A,#0AH
+0118 4003             24             JC NUM
+011A 2441             25             ADD A,#41H
+011C 22               26             LABEL1 : RET
+011D                  27             NUM :
+011D EA               28             MOV A,R2
+011E 2430             29             ADD A,#30H
+0120 80FA             30             SJMP LABEL1
+                      31             
+                      32     END
+A51 MACRO ASSEMBLER  CONVERT                                                              02/13/2022 18:12:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK. . . . . . .  C ADDR   0115H   A   
+CONVERT. . . . . .  C ADDR   0100H   A   
+HERE . . . . . . .  C ADDR   0113H   A   
+LABEL1 . . . . . .  C ADDR   011CH   A   
+NUM. . . . . . . .  C ADDR   011DH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
